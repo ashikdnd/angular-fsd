@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {Validators} from "@angular/forms";
 
 @Component({
@@ -16,8 +16,27 @@ export class AddCustomersComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
       address: ['', [Validators.minLength(10), Validators.maxLength(50)]],
       gender: ['', [Validators.required]],
-      phone: ['', [Validators.required, Validators.pattern('^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[6789]\\d{9}$')]]
+      phone: ['', [Validators.required, Validators.pattern('^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[6789]\\d{9}$')]],
+      cards: this.fb.array([]) // this array will take FormGroup as objects
     })
+
+    this.addNewCard();
+  }
+
+  get cards() {
+    return this.customer.controls['cards'] as FormArray; // type conversion
+  }
+
+  addNewCard() {
+    const newCard = this.fb.group({
+      company: ['', [Validators.required]],
+      cardNumber: ['', [Validators.required]]
+    })
+    this.cards.push(newCard);
+  }
+
+  deleteCard(index: number) {
+    this.cards.removeAt(index);
   }
 
   ngOnInit(): void {
@@ -25,7 +44,9 @@ export class AddCustomersComponent implements OnInit {
   }
 
   saveCustomerForm() {
-    console.log(this.customer.value)
+    const formData = this.customer.value;
+    formData.name = formData.name.trim(); // leading and trailing
+    console.log(formData)
   }
 
 }

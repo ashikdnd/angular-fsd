@@ -3,7 +3,7 @@
   <div class="md:grid md:grid-cols-3 md:gap-6">
     <div class="md:col-span-1">
       <div class="px-4 sm:px-0">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">Add a customer</h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Add a customer <span class="text-red-500">{{customer.status}}</span></h3>
         <p class="mt-1 text-sm text-gray-600">Please fill all mandatory fields marked with <span class="text-red-500">*</span></p>
       </div>
     </div>
@@ -18,6 +18,7 @@
                 <span class="text-red-700" *ngIf="customer.get('name')?.hasError('required')">Name is required</span>
                 <span class="text-red-700" *ngIf="customer.get('name')?.hasError('minlength')">Name must be atleast 6 characters long</span>
                 <span class="text-red-700" *ngIf="customer.get('name')?.hasError('maxlength')">Name must not exceed 20 characters</span>
+                <span class="text-red-700" *ngIf="customer.get('name')?.hasError('pattern')">Name cannot have leading or trailing spaces</span>
               </div>
             </div>
 
@@ -27,6 +28,9 @@
                 <textarea formControlName="address" id="about" name="about" rows="3" class="p-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Address"></textarea>
               </div>
               <p class="mt-2 text-sm text-gray-500">Add address in multiple lines</p>
+              <div *ngIf="customer.get('address')?.dirty">
+                <span class="text-red-700" *ngIf="customer.get('address')?.hasError('minlength')">Key in a valid address</span>
+              </div>
             </div>
 
             <div class="flex flex-row gap-4">
@@ -51,6 +55,29 @@
               </div>
             </div>
 
+            <div class="card-list" formArrayName="cards">
+              <h4>Customer credit cards</h4>
+              <div *ngFor="let card of cards.controls; let i = index">
+                <div [formGroupName]="i" class="flex flex-row gap-3 relative mb-5">
+                  <div class="w-1/4">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company</label>
+                    <input type="text" formControlName="company"  class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Card company">
+                    <div *ngIf="card.get('company')?.dirty">
+                      <span class="text-red-700" *ngIf="card.get('company')?.hasError('required')">Card name is required</span>
+                    </div>
+                  </div>
+
+                  <div class="w-3/4">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Card number ( {{i}} )</label>
+                    <input type="text" formControlName="cardNumber"  class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Card number">
+                  </div>
+
+                  <button *ngIf="cards.controls.length > 1" (click)="deleteCard(i)" class="bg-red-500 text-white rounded absolute right-8 w-6 h-6 cursor-pointer">-</button>
+                  <button *ngIf="i == cards.controls.length - 1" (click)="addNewCard()" class="bg-green-500 text-white rounded absolute right-0 w-6 h-6 cursor-pointer">+</button>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button [disabled]="customer.invalid" type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
@@ -60,3 +87,6 @@
     </div>
   </div>
 </div>
+
+
+<router-outlet></router-outlet>
