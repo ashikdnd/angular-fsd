@@ -10,6 +10,7 @@ import {Validators} from "@angular/forms";
 export class AddCustomersComponent implements OnInit {
 
   customer: FormGroup;
+  type: string = '';
 
   constructor(private fb: FormBuilder) {
     this.customer = this.fb.group({
@@ -40,13 +41,17 @@ export class AddCustomersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    let cd: any = localStorage.getItem('customerInfo');
+    if (cd) {
+      cd = JSON.parse(cd);
+      this.customer.patchValue(cd);
+    }
   }
 
   saveCustomerForm() {
     const formData = this.customer.value;
-    formData.name = formData.name.trim(); // leading and trailing
     console.log(formData)
+    localStorage.setItem('customerInfo', JSON.stringify(formData))
   }
 
 }

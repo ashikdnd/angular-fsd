@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddCustomersComponent } from './add-customers/add-customers.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { HighlightDirective } from './highlight.directive';
+import { UppercaseDirective } from './uppercase.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddCustomersComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    HighlightDirective,
+    UppercaseDirective
   ],
   imports: [
     BrowserModule,

@@ -6,13 +6,34 @@
         <h3 class="text-lg font-medium leading-6 text-gray-900">Add a customer <span class="text-red-500">{{customer.status}}</span></h3>
         <p class="mt-1 text-sm text-gray-600">Please fill all mandatory fields marked with <span class="text-red-500">*</span></p>
       </div>
+      <customer-list></customer-list> <!-- Component Directive -->
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-row gap-4">
+          <label>Customer</label>
+          <input type="radio" [(ngModel)]="type" value="Customer">
+        </div>
+        <div class="flex flex-row gap-4">
+          <label>Business</label>
+          <input type="radio" [(ngModel)]="type" value="Business">
+        </div>
+        <div class="flex flex-row gap-4">
+          <label>Staff</label>
+          <input type="radio" [(ngModel)]="type" value="Staff">
+        </div>
+      </div>
     </div>
     <div class="mt-5 md:mt-0 md:col-span-2">
       <form [formGroup]="customer" (ngSubmit)="saveCustomerForm()">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
           <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
             <div>
-              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Customer name</label>
+              <label [ngSwitch]="type" for="name" class="block mb-2 text-sm font-medium text-black dark:text-gray-300">
+                <span *ngSwitchCase="'Customer'">Customer</span>
+                <span *ngSwitchCase="'Business'">Business</span>
+                <span *ngSwitchCase="'Staff'">Staff</span>
+                <span *ngSwitchDefault>User</span>
+                Name
+              </label>
               <input type="text" id="name" class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Name" formControlName="name">
               <div *ngIf="customer.get('name')?.dirty">
                 <span class="text-red-700" *ngIf="customer.get('name')?.hasError('required')">Name is required</span>
@@ -23,11 +44,15 @@
             </div>
 
             <div>
-              <label for="about" class="block text-sm font-medium text-gray-700"> Address </label>
+              <label for="about" [class.text-9xl]="type == 'Business'"
+                     [ngClass]="{'text-md':type === '', 'text-xl': type === 'Staff', 'text-3xl': type === 'Customer'}"
+                     class="block font-lg text-gray-700"> Address </label>
               <div class="mt-1">
                 <textarea formControlName="address" id="about" name="about" rows="3" class="p-4 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Address"></textarea>
               </div>
-              <p class="mt-2 text-sm text-gray-500">Add address in multiple lines</p>
+
+              <p class="mt-2 text-sm text-gray-500" appHighlight>Add address in multiple lines</p>
+
               <div *ngIf="customer.get('address')?.dirty">
                 <span class="text-red-700" *ngIf="customer.get('address')?.hasError('minlength')">Key in a valid address</span>
               </div>
@@ -56,12 +81,12 @@
             </div>
 
             <div class="card-list" formArrayName="cards">
-              <h4>Customer credit cards</h4>
+              <h4>Customer credit cards {{cards.controls.length}}</h4>
               <div *ngFor="let card of cards.controls; let i = index">
                 <div [formGroupName]="i" class="flex flex-row gap-3 relative mb-5">
                   <div class="w-1/4">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company</label>
-                    <input type="text" formControlName="company"  class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Card company">
+                    <input appUppercase type="text" formControlName="company" class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Card company">
                     <div *ngIf="card.get('company')?.dirty">
                       <span class="text-red-700" *ngIf="card.get('company')?.hasError('required')">Card name is required</span>
                     </div>
