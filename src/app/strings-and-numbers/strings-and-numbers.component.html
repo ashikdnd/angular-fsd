@@ -1,0 +1,28 @@
+<div class="w-2/3 bg-slate-50 border border-slate-500 rounded-lg m-auto mt-6 p-4">
+  <div class="flex flex-row gap-4">
+    <a routerLink="">Home</a>
+    <a routerLink="/pipes">Pipes</a>
+  </div>
+</div>
+
+<div class="w-2/3 bg-slate-50 border border-slate-500 rounded-lg m-auto mt-6 p-4">
+  <div class="flex flex-col">
+    <span>Date: {{birthday | date: 'yyyy/m/d hh:mm a'}}</span>
+    <span>Currency: {{totalBill | currency:'':'':'0.4-6'}}</span>
+    <span>Uppercase: {{'john doe' | uppercase}}</span>
+    <span>Uppercase: {{'WILL SMITH' | lowercase}}</span>
+    <div class="flex flext-row">
+      <input class="w-90 border border-amber-700" type="text" [(ngModel)]="pipeText">
+      <span>{{pipeText | slugText:'*':2}}</span>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <div class="flex flex-row gap-4">
+        <input type="text" class="w-42 border border-red-500" placeholder="number" [(ngModel)]="number"> <!-- 10 -->
+        <input type="text" class="w-42 border border-red-500" placeholder="exponent" [(ngModel)]="exponent"> <!-- 2 -->
+      </div>
+      <span>{{number | power:exponent}}</span> <!-- 100 -->
+    </div>
+  </div>
+</div>
+
