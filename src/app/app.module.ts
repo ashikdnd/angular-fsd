@@ -10,6 +10,11 @@ import { UppercaseDirective } from './uppercase.directive';
 import { StringsAndNumbersComponent } from './strings-and-numbers/strings-and-numbers.component';
 import { SlugTextPipe } from './slug-text.pipe';
 import { FindPowerPipe } from './find-power.pipe';
+import { BlogComponent } from './blog/blog.component';
+import { BlogHeaderComponent } from './blog/blog-header/blog-header.component';
+import { BlogSidebarComponent } from './blog/blog-sidebar/blog-sidebar.component';
+import { BlogContentComponent } from './blog/blog-content/blog-content.component';
+import { BlogFooterComponent } from './blog/blog-footer/blog-footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,12 @@ import { FindPowerPipe } from './find-power.pipe';
     UppercaseDirective,
     StringsAndNumbersComponent,
     SlugTextPipe,
-    FindPowerPipe
+    FindPowerPipe,
+    BlogComponent,
+    BlogHeaderComponent,
+    BlogSidebarComponent,
+    BlogContentComponent,
+    BlogFooterComponent
   ],
   imports: [
     BrowserModule,
