@@ -21,6 +21,9 @@ import { SubComponent } from './math/sub/sub.component';
 import { MulComponent } from './math/mul/mul.component';
 import { DivComponent } from './math/div/div.component';
 import { MathService} from "./services/math.service";
+import { CounterComponent } from './counter/counter.component';
+import { CounterStartComponent } from './counter/counter-start/counter-start.component';
+import { CounterInfoComponent } from './counter/counter-info/counter-info.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { MathService} from "./services/math.service";
     AddComponent,
     SubComponent,
     MulComponent,
-    DivComponent
+    DivComponent,
+    CounterComponent,
+    CounterStartComponent,
+    CounterInfoComponent
   ],
   imports: [
     BrowserModule,

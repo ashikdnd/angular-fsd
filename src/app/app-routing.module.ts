@@ -5,12 +5,13 @@ import {CustomerListComponent} from "./customer-list/customer-list.component";
 import {StringsAndNumbersComponent} from "./strings-and-numbers/strings-and-numbers.component";
 import {BlogComponent} from "./blog/blog.component";
 import {MathComponent} from "./math/math.component";
+import {CounterComponent} from "./counter/counter.component";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'math'
+    redirectTo: 'counter'
   },
   {
     path: 'add-customer',
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'math',
     component: MathComponent
+  },
+  {
+    path: 'counter',
+    component: CounterComponent
   }
 ];
 
