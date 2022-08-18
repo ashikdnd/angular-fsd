@@ -15,6 +15,12 @@ import { BlogHeaderComponent } from './blog/blog-header/blog-header.component';
 import { BlogSidebarComponent } from './blog/blog-sidebar/blog-sidebar.component';
 import { BlogContentComponent } from './blog/blog-content/blog-content.component';
 import { BlogFooterComponent } from './blog/blog-footer/blog-footer.component';
+import { MathComponent } from './math/math.component';
+import { AddComponent } from './math/add/add.component';
+import { SubComponent } from './math/sub/sub.component';
+import { MulComponent } from './math/mul/mul.component';
+import { DivComponent } from './math/div/div.component';
+import { MathService} from "./services/math.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +36,12 @@ import { BlogFooterComponent } from './blog/blog-footer/blog-footer.component';
     BlogHeaderComponent,
     BlogSidebarComponent,
     BlogContentComponent,
-    BlogFooterComponent
+    BlogFooterComponent,
+    MathComponent,
+    AddComponent,
+    SubComponent,
+    MulComponent,
+    DivComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +49,7 @@ import { BlogFooterComponent } from './blog/blog-footer/blog-footer.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [MathService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

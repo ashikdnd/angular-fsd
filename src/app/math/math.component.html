@@ -1,0 +1,17 @@
+<div class="flex flex-col gap-4 w-2/4 m-auto mt-10">
+  <div class="flex flex-col mb-4">
+    <div class="flex flex-row gap-2">
+      <input type="text" class="w-1/2 border border-sky-300" placeholder="Number 1" [formControl]="n1">
+      <input type="text" class="w-1/2 border border-sky-300" placeholder="Number 2" [formControl]="n2">
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <app-add class="w-1/4 border-r border-slate-300 px-4"></app-add>
+    <app-sub class="w-1/4 border-r border-slate-300 px-4"></app-sub>
+    <app-mul class="w-1/4 border-r border-slate-300 px-4"></app-mul>
+    <app-div class="w-1/4 border-r border-slate-300 px-4"></app-div>
+  </div>
+  <button class="bg-amber-800 rounded cursor-pointer" (click)="seq()">Sequence</button>
+  <br>
+  {{this.sequence}}
+</div>
