@@ -24,6 +24,11 @@ import { MathService} from "./services/math.service";
 import { CounterComponent } from './counter/counter.component';
 import { CounterStartComponent } from './counter/counter-start/counter-start.component';
 import { CounterInfoComponent } from './counter/counter-info/counter-info.component';
+import { ObserveComponent } from './observe/observe.component';
+import { AComponent } from './observe/a/a.component';
+import { BComponent } from './observe/b/b.component';
+import { DataComponent } from './data/data.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -47,13 +52,18 @@ import { CounterInfoComponent } from './counter/counter-info/counter-info.compon
     DivComponent,
     CounterComponent,
     CounterStartComponent,
-    CounterInfoComponent
+    CounterInfoComponent,
+    ObserveComponent,
+    AComponent,
+    BComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [MathService],
   bootstrap: [AppComponent]

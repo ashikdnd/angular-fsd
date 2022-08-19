@@ -6,12 +6,14 @@ import {StringsAndNumbersComponent} from "./strings-and-numbers/strings-and-numb
 import {BlogComponent} from "./blog/blog.component";
 import {MathComponent} from "./math/math.component";
 import {CounterComponent} from "./counter/counter.component";
+import {ObserveComponent} from "./observe/observe.component";
+import {DataComponent} from "./data/data.component";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'counter'
+    redirectTo: 'api'
   },
   {
     path: 'add-customer',
@@ -32,6 +34,14 @@ const routes: Routes = [
   {
     path: 'counter',
     component: CounterComponent
+  },
+  {
+    path: 'observe',
+    component: ObserveComponent
+  },
+  {
+    path: 'api',
+    component: DataComponent
   }
 ];
 
